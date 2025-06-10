@@ -1,1 +1,23 @@
+@font-face {
+  font-family: Exo2;
+  src: url("../src/assets/fonts/Exo2-Regular.ttf");
+}
+
+@theme {
+  --animate-infinite-scroll: infinite-scroll 20s linear infinite;
+
+  @keyframes infinite-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-50% - 20px));
+    }
+  }
+}
+
+body {
+  font-family: Exo2, "sans-serif";
+}
+
 @import "tailwindcss";

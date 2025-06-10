@@ -1,11 +1,12 @@
-
-import NavButtom from "../components/molecules/navBottom/NavButtom";
+import NavTop from "../components/templates/navTop/NavTop";
+import NavButtom from "../components/templates/navBottom/NavButtom";
 
 const Layout = ({ children }) => {
   return (
     <div className="bg-slate-800 min-h-screen">
+      <NavTop />
       {children}
-      <NavButtom/>
+      <NavButtom />
     </div>
   );
 };

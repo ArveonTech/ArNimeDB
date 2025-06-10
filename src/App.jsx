@@ -2,9 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./layouts/MainLayout";
 import HomePages from "./components/pages/HomePages";
 import ExplorePages from "./components/pages/Explore";
-import TopAnimePages from "./components/pages/TopAnimePages";
 import GenresPages from "./components/pages/Genres";
-import NotFoundPages from "./components/pages/NotFoundPages"
+import RecommendedPages from "./components/pages/RecommendedPages";
+import NotFoundPages from "./components/pages/NotFoundPages";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
     path: "/topAnime",
     element: (
       <Layout>
-        <TopAnimePages />
+        <RecommendedPages />
       </Layout>
     ),
   },
