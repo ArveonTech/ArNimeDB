@@ -1,7 +1,7 @@
 const Favorite = () => {
   return (
     <div>
-      <img src="icons/favorite.png" alt="favorite icon" className="h-10 w-10" />
+      <img src="icons/favorite.png" alt="favorite icon" className="h-9 w-9" />
     </div>
   );
 };
