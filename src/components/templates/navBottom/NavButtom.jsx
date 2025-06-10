@@ -24,7 +24,7 @@ const NavButtom = () => {
   return (
     <>
       {windowWidth < 768 && (
-        <div className="fixed w-full bottom-0 rounded-t-3xl py-5 flex justify-around bg-slate-900">
+        <div className="fixed  z-20 w-full bottom-0 rounded-t-3xl py-5 flex justify-around bg-slate-900">
           {iconList.map(({ path, icon, name }, index) => (
             <Icons key={index} image={icon} to={path} name={name} active={location.pathname === path} />
           ))}

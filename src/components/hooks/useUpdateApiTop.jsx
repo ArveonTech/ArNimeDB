@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useUpdateApiSlider = () => {
+const useUpdateApiTop = ({ limit }) => {
   const [loading, setLoading] = useState(false);
-  const [dataset, setDataSet] = useState(null);
-  const cacheKeyTopAnime = "TopAnime";
+  const [dataTop, setData] = useState([]);
+  const [error, setError] = useState(null);
+  const cacheKeyTopAnime = `TopAnime-${limit}`;
 
   // ambil data dari api untuk slider
   useEffect(() => {
@@ -16,29 +17,30 @@ const useUpdateApiSlider = () => {
     if (cachedString) {
       const cached = JSON.parse(cachedString);
       if (now - cached.timestamp < cacheDuration) {
-        setDataSet(cached.data);
-        setLoading(false); 
+        setLoading(false);
+        setData(cached.data);
         return;
       }
     }
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://api.jikan.moe/v4/top/anime?limit=10");
+        const response = await axios.get(`https://api.jikan.moe/v4/top/anime?limit=${limit}`);
         const newData = {
           timestamp: now,
           data: response.data.data,
         };
-        setLoading(false);
         localStorage.setItem(cacheKeyTopAnime, JSON.stringify(newData));
-        setDataSet(response.data.data);
+        setData(response.data.data);
       } catch (error) {
-        console.log(error);
+        setError(error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
-  }, []);
+  }, [limit]);
 
-  return { dataset, loading };
+  return { dataTop, loading, error };
 };
 
-export default useUpdateApiSlider;
+export default useUpdateApiTop;
