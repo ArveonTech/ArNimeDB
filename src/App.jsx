@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./layouts/MainLayout";
 import HomePages from "./components/pages/HomePages";
-import ExplorePages from "./components/pages/Explore";
-import GenresPages from "./components/pages/Genres";
+import ExplorePages from "./components/pages/ExplorePages";
+import GenresPages from "./components/pages/GenresPages";
 import RecommendedPages from "./components/pages/RecommendedPages";
 import NotFoundPages from "./components/pages/NotFoundPages";
+import DetailPages from "./components/pages/DetailPages";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         <GenresPages />
       </Layout>
     ),
+  },
+  {
+    path: "/detail/:id",
+    element: <DetailPages />,
   },
   {
     path: "*",

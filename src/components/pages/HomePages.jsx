@@ -6,14 +6,14 @@ import Loading from "../templates/loading/Loading";
 import Carousel from "../templates/carousel/Carousel";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import Footer from "../templates/footer/Footer";
+import ListAnime from "../templates/listAnime/ListAnime";
 
 const HomePages = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { dataTop, loadingTop, errorTop } = useUpdateApiTop({ limit: 10 });
-  const { updateAnime, loadingUpadate, errorUpdate } = useUpdateToday();
+  const { updateAnime, loadingUpdate, errorUpdate } = useUpdateToday();
   const errorShownRef = useRef(false);
   const carousel = dataTop.slice(0, 5);
-  const updateAnimeSlice = updateAnime.slice(0, 10);
 
   useEffect(() => {
     if (errorTop || errorUpdate) {
@@ -91,9 +91,11 @@ const HomePages = () => {
             <div className="flex w-max gap-10 animate-infinite-scroll">
               {dataTop &&
                 [...dataTop, ...dataTop].map((data, i) => (
-                  <div key={i} className="w-44 shrink-0">
-                    <img src={data.images.webp.large_image_url} className="h-full object-cover" />
-                  </div>
+                  <Link to={`/detail/${data.mal_id}`} className="w-44 shrink-0" key={i}>
+                    <div className="h-full">
+                      <img src={data.images.webp.large_image_url} className="h-full object-cover" />
+                    </div>
+                  </Link>
                 ))}
             </div>
           </main>
@@ -103,27 +105,7 @@ const HomePages = () => {
         <header className="mb-10">
           <h1 className="text-3xl text-white">Update Anime</h1>
         </header>
-        <main>
-          {loadingUpadate ? (
-            <Loading />
-          ) : (
-            <div className="flex gap-10 flex-wrap justify-center">
-              {updateAnime &&
-                updateAnime.map((data, i) => (
-                  <div className="max-w-max" key={i}>
-                    <div className="bg-white rounded-xl shadow-md overflow-hidden relative w-40 h-56 group cursor-pointer">
-                      <img src={data.images.jpg.large_image_url} alt={`gambar-${i}`} className="h-full w-full object-cover rounded-xl" />
-                      <div className="absolute w-full inset-0 bg-slate-900/75 p-4 transform translate-y-56 group-hover:translate-y-0 transition-transform duration-400 rounded-xl shadow-lg z-20 flex flex-col justify-center">
-                        <h3 className="text-lg font-semibold text-white text-center mb-1 select-none">{data.titles[0].title}</h3>
-                        <p className="text-sm text-white text-center font-medium mb-2 select-none overflow-hidden text-ellipsis">Genres : {data.genres.map((genre) => genre.name).join(",")}</p>
-                        <p className="text-xs text-white text-justify leading-relaxed select-none">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, at!</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          )}
-        </main>
+        <main>{loadingUpdate ? <Loading /> : <div className="flex gap-10 flex-wrap justify-center">{updateAnime && updateAnime.map((data, i) => <ListAnime data={data} key={i} />)}</div>}</main>
       </div>
       <Footer />
       <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" transition={Bounce} />

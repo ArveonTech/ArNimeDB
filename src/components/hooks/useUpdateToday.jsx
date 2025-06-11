@@ -17,6 +17,7 @@ const useUpdateToday = () => {
       const cached = JSON.parse(lastFecthDate);
       if (cached.today === today) {
         setUpdateAnime(cached.data);
+        setLoading(false);
         return;
       }
     }
@@ -38,6 +39,7 @@ const useUpdateToday = () => {
     };
     fetchData();
   }, []);
+  
   return { updateAnime, loadingUpdate, errorUpdate };
 };
 

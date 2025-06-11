@@ -13,6 +13,7 @@ const Loading = () => {
           />
         </svg>
       </div>
+      <p className="text-lg text-blue-600 ml-2 ">Loading</p>
     </div>
   );
 };

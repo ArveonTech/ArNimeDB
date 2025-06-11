@@ -1,11 +1,15 @@
+import { Link } from "react-router-dom";
+
 const Carousel = ({ data, index }) => {
   return (
     data && (
       <div className="w-full shrink-0 relative">
         <img className="h-[450px] w-full object-cover" src={data.images.webp.large_image_url} alt={`Carousel-${index}`} />
         <div className="absolute p-4 h-full top-0 left-0 z-10 md:px-30">
-          <div className="h-full  md:flex md:gap-10 md:items-center">
-            <img className="bg-blue-950 h-52 rounded mx-auto" src={data.images.jpg.image_url} alt="images-mini" />
+          <div className="h-full md:flex md:gap-10 md:items-center">
+            <Link to={`/detail/${data.mal_id}`} className="flex md:items-center md:h-full">
+              <img className="max-h-52 min-h-40 min-w-40 w-auto rounded mx-auto cursor-pointer" src={data.images.jpg.image_url} alt="images-mini" />
+            </Link>
             <div className="text-white">
               <section className="text-center md:text-start">
                 <h1 className="text-2xl font-bold text-shadow-lg/90 ">{data.titles[0].title}</h1>
