@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { getAnimeApi } from "../../libs/api-lib";
 
-const useDetailAnime = (id) => {
+const useListslAnime = (page) => {
   const [loadingAnime, setLoadingAnime] = useState(false);
-  const [dataSet, setDataSet] = useState([]);
+  const [listAnime, setListAnime] = useState([]);
+  const [pages, setPages] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -11,8 +12,9 @@ const useDetailAnime = (id) => {
 
     const fetchData = async () => {
       try {
-        const response = await getAnimeApi(`anime/${id}/full`);
-        setDataSet(response.data.data);
+        const response = await getAnimeApi(`top/anime`, `page=${page}`);
+        setListAnime(response.data.data);
+        setPages(response.data.pagination);
       } catch (error) {
         setError(error);
       } finally {
@@ -20,9 +22,9 @@ const useDetailAnime = (id) => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [page]);
 
-  return { dataSet, loadingAnime, error };
+  return { pages, listAnime, loadingAnime, error };
 };
 
-export default useDetailAnime;
+export default useListslAnime;

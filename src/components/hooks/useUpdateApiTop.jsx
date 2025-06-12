@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { getAnimeApi } from "../../libs/api-lib";
 
 const useUpdateApiTop = ({ limit }) => {
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const useUpdateApiTop = ({ limit }) => {
     }
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://api.jikan.moe/v4/top/anime?limit=${limit}`);
+        const response = await getAnimeApi("top/anime", `limit=${limit}`);
         const newData = {
           timestamp: now,
           data: response.data.data,

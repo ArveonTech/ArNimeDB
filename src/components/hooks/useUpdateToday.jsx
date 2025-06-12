@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { getAnimeApi } from "../../libs/api-lib";
 
 const useUpdateToday = () => {
   const [loadingUpdate, setLoading] = useState(false);
@@ -24,11 +24,15 @@ const useUpdateToday = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://api.jikan.moe/v4/schedules/${today}`);
+        console.log("Requesting:", `schedules/${today}`);
+        const response = await getAnimeApi(`schedules/${today}`);
+        console.log("Response OK:", response);
         const newData = {
           today,
           data: response.data.data,
         };
+        console.log("Cache Key:", cacheKeyUpdateAnime);
+        console.log("Data yang disimpan:", newData);
         localStorage.setItem(cacheKeyUpdateAnime, JSON.stringify(newData));
         setUpdateAnime(response.data.data);
       } catch (error) {
@@ -39,7 +43,7 @@ const useUpdateToday = () => {
     };
     fetchData();
   }, []);
-  
+
   return { updateAnime, loadingUpdate, errorUpdate };
 };
 
