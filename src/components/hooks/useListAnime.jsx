@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAnimeApi } from "../../libs/api-lib";
 
-const useListslAnime = (page) => {
+const useListslAnime = (page, searchKeyword = "") => {
   const [loadingAnime, setLoadingAnime] = useState(false);
   const [listAnime, setListAnime] = useState([]);
   const [pages, setPages] = useState(null);
@@ -9,10 +9,21 @@ const useListslAnime = (page) => {
 
   useEffect(() => {
     setLoadingAnime(true);
-
     const fetchData = async () => {
       try {
-        const response = await getAnimeApi(`top/anime`, `page=${page}`);
+        let endpoint = "";
+        let query = "";
+
+        if (searchKeyword.trim() === "") {
+          // Top anime
+          endpoint = "top/anime";
+          query = `page=${page}`;
+        } else {
+          // Search anime
+          endpoint = "anime";
+          query = `q=${searchKeyword}&page=${page}`;
+        }
+        const response = await getAnimeApi(endpoint, query);
         setListAnime(response.data.data);
         setPages(response.data.pagination);
       } catch (error) {
@@ -21,8 +32,9 @@ const useListslAnime = (page) => {
         setLoadingAnime(false);
       }
     };
+
     fetchData();
-  }, [page]);
+  }, [page, searchKeyword]);
 
   return { pages, listAnime, loadingAnime, error };
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useDebounce from "../hooks/useDebounce";
 import useListslAnime from "../hooks/useListAnime";
 import Search from "../templates/search/Search";
@@ -8,8 +8,23 @@ import Loading from "../templates/loading/Loading";
 import Pagination from "../templates/pagination/pagination";
 
 const ExplorePages = () => {
+  const [searchInput, setSearchInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const { pages, listAnime, loadingAnime, error } = useListslAnime(currentPage);
+  const debouncedSearch = useDebounce(searchInput, 1000);
+  const { pages, listAnime, loadingAnime, error } = useListslAnime(currentPage, debouncedSearch);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [searchInput, currentPage]);
+
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value);
+    setCurrentPage(1);
+  };
+
+  useEffect(() => {
+    setSearchInput(debouncedSearch.trim());
+  }, [debouncedSearch]);
 
   const prevPage = () => {
     if (!pages) return;
@@ -29,12 +44,12 @@ const ExplorePages = () => {
 
   return (
     <div className="min-h-screen">
-      <Search />
-      {loadingAnime ? <Loading /> : <div className="flex mt-20 gap-10 flex-wrap justify-center">{listAnime && listAnime.map((data, i) => <ListAnime data={data} key={i} />)}</div>}
+      <Search handleSearch={handleSearch} />
       {loadingAnime ? (
         <Loading />
       ) : (
         <>
+          <div className="flex mt-20 gap-10 flex-wrap justify-center">{listAnime && listAnime.map((data, i) => <ListAnime data={data} key={i} />)}</div>
           <Pagination handleNext={nextPage} handlePrev={prevPage} currentPage={currentPage} lastPage={pages?.last_visible_page} />
         </>
       )}
