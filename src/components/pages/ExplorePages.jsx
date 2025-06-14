@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import useDebounce from "../hooks/useDebounce";
 import useListslAnime from "../hooks/useListAnime";
 import Search from "../templates/search/Search";
@@ -8,18 +9,39 @@ import Loading from "../templates/loading/Loading";
 import Pagination from "../templates/pagination/pagination";
 
 const ExplorePages = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageFromQuery = parseInt(searchParams.get("page")) || 1;
   const [searchInput, setSearchInput] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearch = useDebounce(searchInput, 1000);
-  const { pages, listAnime, loadingAnime, error } = useListslAnime(currentPage, debouncedSearch);
+  const { pages, listAnime, loadingAnime, error } = useListslAnime(pageFromQuery, debouncedSearch);
+  const errorShownRef = useRef(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [searchInput, currentPage]);
+  }, [searchInput, pageFromQuery]);
+
+  useEffect(() => {
+    if (error) {
+      if (!errorShownRef.current) {
+        toast.error("Terjadi Error, silahkan reload", {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        errorShownRef.current = true;
+      }
+    }
+  }, [error]);
 
   const handleSearch = (e) => {
     setSearchInput(e.target.value);
-    setCurrentPage(1);
+    setSearchParams({ page: 1 });
   };
 
   useEffect(() => {
@@ -27,19 +49,17 @@ const ExplorePages = () => {
   }, [debouncedSearch]);
 
   const prevPage = () => {
-    if (!pages) return;
-    if (currentPage <= 1) return;
+    if (!pages || pageFromQuery <= 1) return;
 
-    setCurrentPage((prev) => prev - 1);
-    window.scrollTo({ top: 0, behavior: "smooth" }); // ⬅️ ini buat scroll ke atas
+    setSearchParams({ page: pageFromQuery - 1 });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const nextPage = () => {
-    if (!pages) return;
-    if (currentPage >= pages.last_visible_page) return;
+    if (!pages || pageFromQuery >= pages.last_visible_page) return;
 
-    setCurrentPage((prev) => prev + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" }); // ⬅️ scroll halus ke atas
+    setSearchParams({ page: pageFromQuery + 1 });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -49,8 +69,8 @@ const ExplorePages = () => {
         <Loading />
       ) : (
         <>
-          <div className="flex mt-20 gap-10 flex-wrap justify-center">{listAnime && listAnime.map((data, i) => <ListAnime data={data} key={i} />)}</div>
-          <Pagination handleNext={nextPage} handlePrev={prevPage} currentPage={currentPage} lastPage={pages?.last_visible_page} />
+          <div className="flex mt-20 gap-10 flex-wrap justify-center">{listAnime && listAnime.length > 0 ? listAnime.map((data, i) => <ListAnime data={data} key={i} />) : <p className="text-white text-xl">Not Found</p>}</div>
+          <Pagination handleNext={nextPage} handlePrev={prevPage} currentPage={pageFromQuery} lastPage={pages?.last_visible_page} />
         </>
       )}
       <Footer />

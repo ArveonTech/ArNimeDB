@@ -87,8 +87,8 @@ const HomePages = () => {
         {loadingTop ? (
           <Loading />
         ) : (
-          <main className="overflow-hidden">
-            <div className="flex w-max gap-10 animate-infinite-scroll">
+          <main className="overflow-hidden group">
+            <div className="flex w-max gap-10 animate-infinite-scroll group-hover:[animation-play-state:paused]">
               {dataTop &&
                 [...dataTop, ...dataTop].map((data, i) => (
                   <Link to={`/detail/${data.mal_id}`} className="w-44 shrink-0" key={i}>

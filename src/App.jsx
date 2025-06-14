@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/topAnime",
+    path: "/recommended",
     element: (
       <Layout>
         <RecommendedPages />
