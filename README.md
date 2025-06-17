@@ -1,12 +1,63 @@
-# React + Vite
+# 🌸 ArNimeDB - Anime Database App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ArNimeDB adalah aplikasi web database anime sederhana yang memungkinkan pengguna untuk mencari anime, melihat detailnya, menyaring berdasarkan genre, dan menyimpan anime favorit ke dalam bookmark.
 
-Currently, two official plugins are available:
+Versi bahasa Inggris ada di bawah ya! 👇
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ☁️ Bahasa Indonesia
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🚀 Fitur Utama:
+
+- 🔍 Cari anime berdasarkan judul
+- 🎭 Filter berdasarkan genre
+- 📄 Lihat detail anime (sinopsis, skor, trailer, dll)
+- 📑 Simpan dan hapus bookmark
+- 🔔 Notifikasi toast saat menambahkan/menghapus anime
+- 💻 Desain responsif
+
+### 🔧 Teknologi:
+
+- React
+- Redux Toolkit
+- React Router
+- Tailwind CSS
+- React Toastify
+- Jikan API (untuk data anime)
+
+### 🎯 Tujuan Proyek:
+
+Latihan membuat SPA (Single Page Application) yang interaktif, terhubung dengan API eksternal, dan menggunakan state management dengan Redux. Saya juga ingin melatih keterampilan membuat UI yang bersih dan nyaman digunakan.
+
+---
+
+## 🌐 English Version
+
+### 🚀 Key Features:
+
+- 🔍 Search anime by title
+- 🎭 Filter anime by genres
+- 📄 View anime details (synopsis, score, trailer, etc.)
+- 📑 Add/remove bookmarks
+- 🔔 Toast notifications on actions
+- 💻 Fully responsive UI
+
+### 🔧 Tech Stack:
+
+- React
+- Redux Toolkit
+- React Router
+- Tailwind CSS
+- React Toastify
+- Jikan API (for anime data)
+
+### 🎯 Purpose:
+
+This project is a personal practice to build a simple but complete SPA using real anime data from a public API. It also helped me understand how to handle global state with Redux and display dynamic data with smooth user interaction.
+
+---
+
+
+Thanks for checking this out! 🌸  
+Feel free to give feedback or connect with me!
