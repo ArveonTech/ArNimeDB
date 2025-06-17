@@ -1,4 +1,4 @@
-import Icons from "../../../atoms/navBottom/icons";
+import Icons from "../../../atoms/navBottom/Icons";
 import { useLocation } from "react-router-dom";
 
 const NavMd = () => {
