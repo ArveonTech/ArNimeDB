@@ -10,7 +10,7 @@ const useUpdateToday = () => {
   useEffect(() => {
     setLoading(true);
     const time = new Date();
-    const today = time.toLocaleString("us-US", { weekday: "long" }).toLowerCase();
+    const today = time.toLocaleString("en-US", { weekday: "long" }).toLowerCase();
     const lastFecthDate = localStorage.getItem("lastFecthDate");
 
     if (lastFecthDate) {
