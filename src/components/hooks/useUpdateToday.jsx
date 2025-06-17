@@ -24,9 +24,7 @@ const useUpdateToday = () => {
 
     const fetchData = async () => {
       try {
-        console.log("Requesting:", `schedules/${today}`);
         const response = await getAnimeApi(`schedules/${today}`);
-        console.log("Response OK:", response);
         const newData = {
           today,
           data: response.data.data,

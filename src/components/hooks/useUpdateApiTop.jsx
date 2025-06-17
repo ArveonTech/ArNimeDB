@@ -17,8 +17,8 @@ const useUpdateApiTop = ({ limit }) => {
     if (cachedString) {
       const cached = JSON.parse(cachedString);
       if (now - cached.timestamp < cacheDuration) {
-        setLoading(false);
         setData(cached.data);
+        setLoading(false);
         return;
       }
     }

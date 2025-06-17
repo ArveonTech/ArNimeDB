@@ -5,33 +5,12 @@ import Loading from "../templates/loading/Loading";
 import ListAnime from "../templates/listAnime/ListAnime";
 import Dropdown from "../templates/dropdowngenres/dropdown";
 import Pagination from "../templates/pagination/pagination";
-import { useEffect, useRef } from "react";
 
 const GenresPages = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const pageFromQuery = parseInt(searchParams.get("page")) || 1;
   const genresFromQuery = searchParams.get("genres") || "";
   const { pages, listAnime, loadingAnime, error, genresAnime } = useGenresAnime(pageFromQuery, genresFromQuery);
-  const errorShownRef = useRef(false);
-
-  useEffect(() => {
-    if (error) {
-      if (!errorShownRef.current) {
-        toast.error("Terjadi Error, silahkan reload", {
-          position: "top-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-        errorShownRef.current = true;
-      }
-    }
-  }, [error]);
 
   const handleClickGenres = (callback) => {
     const currentParams = new URLSearchParams(searchParams.toString());

@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux"; // ✅ import Provider
+import store from "./redux/store"; // ✅ import store Redux
 import Layout from "./layouts/MainLayout";
 import HomePages from "./components/pages/HomePages";
 import ExplorePages from "./components/pages/ExplorePages";
@@ -6,6 +8,7 @@ import GenresPages from "./components/pages/GenresPages";
 import RecommendedPages from "./components/pages/RecommendedPages";
 import NotFoundPages from "./components/pages/NotFoundPages";
 import DetailPages from "./components/pages/DetailPages";
+import FavoritePages from "./components/pages/BookmarkPages";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +44,14 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/bookmark",
+    element: (
+      <Layout>
+        <FavoritePages />
+      </Layout>
+    ),
+  },
+  {
     path: "/detail/:id",
     element: <DetailPages />,
   },
@@ -51,7 +62,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;

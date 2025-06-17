@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import BrandName from "../../atoms/navTop/BrandName";
-import Favorite from "../../atoms/navTop/Favorite";
+import Bookmark from "../../atoms/navTop/Bookmark";
 import NavMd from "./navmd/NavMd";
 
 const NavTop = () => {
@@ -36,7 +36,7 @@ const NavTop = () => {
         <BrandName />
         <div className="flex items-center gap-10">
           {windowWidth > 768 && <NavMd />}
-          <Favorite />
+          <Bookmark />
         </div>
       </div>
     </>

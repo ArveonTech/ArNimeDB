@@ -3,8 +3,8 @@ import { useState } from "react";
 const Dropdown = ({ data, handleClick }) => {
   const [genres, setGenres] = useState([]);
   return (
-    <div className="bg-slate-600 p-6 rounded-xl shadow-md space-y-4 w-80 mx-auto">
-      <h2 className="text-xl font-semibold text-white">Pilih Dua Genre</h2>
+    <div className="bg-slate-600 p-6 rounded-xl shadow-md space-y-4 w-80 mx-auto mt-20">
+      <h2 className="text-xl font-semibold text-white">Select Genre</h2>
 
       <div>
         <label htmlFor="genre1" className="block text-sm text-white mb-1">

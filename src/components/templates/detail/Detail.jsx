@@ -2,9 +2,52 @@ import Footer from "../footer/Footer";
 import YouTube from "react-youtube";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { tambahData } from "../../../redux/createSlice";
 
 const Detail = ({ data }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const showSuccessToast = (message = "Berhasil menambahkan anime") => {
+    toast.success(message, {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
+
+  const showErrorToast = (message = "Terjadi kesalahan!") => {
+    toast.error(message, {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
+
+  const showInfoToast = (message = "Anime ini sudah ada di bookmark kamu") => {
+    toast.info(message, {
+      position: "top-left",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,6 +78,31 @@ const Detail = ({ data }) => {
       <header className="bg-gradient-to-bl from-slate-900 to-slate-800 p-8 relative">
         <button onClick={() => navigate(-1)}>
           <img src="/icons/prev.png" alt="previous" className="absolute top-5 left-5 w-14 cursor-pointer animate-bounce" />
+        </button>
+
+        <button
+          onClick={() => {
+            const stored = localStorage.getItem("bookmark");
+            let bookmarks = [];
+
+            try {
+              const parsed = stored ? JSON.parse(stored) : {};
+              bookmarks = Array.isArray(parsed.data) ? parsed.data : [];
+            } catch (e) {
+              bookmarks = [];
+            }
+
+            const matched = bookmarks.find((b) => data?.mal_id === b.mal_id);
+            if (matched) {
+              showInfoToast();
+              return;
+            }
+
+            dispatch(tambahData(data));
+            showSuccessToast();
+          }}
+        >
+          <img src="/icons/favorite.png" alt="previous" className="absolute top-5 right-5 w-14 cursor-pointer" />
         </button>
 
         <div className="flex flex-col items-center mt-8">
@@ -71,6 +139,7 @@ const Detail = ({ data }) => {
         )}
       </main>
       <Footer />
+      <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" transition={Bounce} />
     </div>
   );
 };
