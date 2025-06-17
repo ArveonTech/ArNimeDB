@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Icons from "../../atoms/navBottom/icons";
+import Icons from "../../atoms/navBottom/Iconscons";
 import { useLocation } from "react-router-dom";
 
 const NavButtom = () => {
