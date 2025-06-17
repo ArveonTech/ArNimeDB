@@ -6,7 +6,7 @@ import Search from "../templates/search/Search";
 import ListAnime from "../templates/listAnime/ListAnime";
 import Footer from "../templates/footer/Footer";
 import Loading from "../templates/loading/Loading";
-import Pagination from "../templates/pagination/pagination";
+import Pagination from "../templates/pagination/Pagination";
 
 const ExplorePages = () => {
   const [searchParams, setSearchParams] = useSearchParams();
