@@ -10,7 +10,7 @@ const Detail = ({ data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const showSuccessToast = (message = "Berhasil menambahkan anime") => {
+  const showSuccessToast = (message = "Anime added to bookmark.") => {
     toast.success(message, {
       position: "top-left",
       autoClose: 5000,
@@ -23,7 +23,7 @@ const Detail = ({ data }) => {
     });
   };
 
-  const showErrorToast = (message = "Terjadi kesalahan!") => {
+  const showErrorToast = (message = "There is an error") => {
     toast.error(message, {
       position: "top-left",
       autoClose: 5000,
@@ -36,7 +36,7 @@ const Detail = ({ data }) => {
     });
   };
 
-  const showInfoToast = (message = "Anime ini sudah ada di bookmark kamu") => {
+  const showInfoToast = (message = "This anime is already bookmarked.") => {
     toast.info(message, {
       position: "top-left",
       autoClose: 4000,

@@ -10,7 +10,7 @@ const Dropdown = ({ data, handleClick }) => {
         <label htmlFor="genre1" className="block text-sm text-white mb-1">
           Genre 1
         </label>
-        <select id="genre1" className="w-full border bg-slate-700 text-white border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <select id="genre1" className="w-full border bg-slate-700 text-white border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer">
           <option value="">-- Select Genre 1 --</option>
           {data.data?.map((genres, i) => (
             <option value={genres.mal_id} key={i}>
@@ -24,7 +24,7 @@ const Dropdown = ({ data, handleClick }) => {
         <label htmlFor="genre2" className="block text-sm text-white mb-1">
           Genre 2
         </label>
-        <select id="genre2" className="w-full border bg-slate-700 text-white border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <select id="genre2" className="w-full border bg-slate-700 text-white border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer">
           <option value="">-- Select Genre 2 --</option>
           {data.data?.map((genres, i) => (
             <option value={genres.mal_id} key={i}>

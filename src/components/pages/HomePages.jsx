@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useUpdateApiTop from "../hooks/useUpdateApiTop";
 import useUpdateToday from "../hooks/useUpdateToday";
 import Loading from "../templates/loading/Loading";
 import Carousel from "../templates/carousel/Carousel";
-import { ToastContainer, toast, Bounce } from "react-toastify";
 import Footer from "../templates/footer/Footer";
 import ListAnime from "../templates/listAnime/ListAnime";
 
@@ -12,29 +11,8 @@ const HomePages = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { dataTop, loadingTop, errorTop } = useUpdateApiTop({ limit: 10 });
   const { updateAnime, loadingUpdate, errorUpdate } = useUpdateToday();
-  const errorShownRef = useRef(false);
   const carousel = dataTop.slice(0, 5);
 
-  useEffect(() => {
-    if (errorTop || errorUpdate) {
-      if (!errorShownRef.current) {
-        toast.error("Terjadi Error, silahkan reload", {
-          position: "top-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-        errorShownRef.current = true;
-      }
-    }
-  }, [errorTop, errorUpdate]);
-
-  // untuk ngelooping si carousel
   useEffect(() => {
     if (carousel && carousel.length > 0) {
       const interval = setInterval(() => {
@@ -44,7 +22,6 @@ const HomePages = () => {
     }
   }, [carousel]);
 
-  // loop slider
   const nextSlide = () => {
     if (carousel && carousel.length > 0) {
       setCurrentIndex((prev) => (prev + 1) % carousel.length);
@@ -108,7 +85,6 @@ const HomePages = () => {
         <main>{loadingUpdate ? <Loading /> : <div className="flex gap-10 flex-wrap justify-center">{updateAnime && updateAnime.map((data, i) => <ListAnime data={data} key={i} />)}</div>}</main>
       </div>
       <Footer />
-      <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" transition={Bounce} />
     </div>
   );
 };

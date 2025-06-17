@@ -15,22 +15,25 @@ const GenresPages = () => {
   const handleClickGenres = (callback) => {
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.set("genres", callback);
-    console.log(currentParams);
-    currentParams.set("page", 1); // reset page ke awal kalau perlu
+    currentParams.set("page", 1);
     setSearchParams(currentParams);
-  };
-
-  const prevPage = () => {
-    if (!pages || pageFromQuery <= 1) return;
-
-    setSearchParams({ page: pageFromQuery - 1 });
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const nextPage = () => {
     if (!pages || pageFromQuery >= pages.last_visible_page) return;
 
-    setSearchParams({ page: pageFromQuery + 1 });
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set("page", pageFromQuery + 1);
+    setSearchParams(currentParams);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const prevPage = () => {
+    if (!pages || pageFromQuery <= 1) return;
+
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set("page", pageFromQuery - 1);
+    setSearchParams(currentParams);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

@@ -5,7 +5,7 @@ const Footer = () => {
     { path: "https://github.com/ArveonTech", icon: "/icons/github.png", name: "Github" },
   ];
   return (
-    <div className="pt-10 py-20 mt-20 bg-slate-900 text-white flex flex-col items-center md:pt-20 md:py-10">
+    <div className="pt-10 py-20 mt-20 bg-slate-900 text-white flex flex-col items-center md:pt-20 md:py-10 w-full">
       <h1 className="text-2xl font-semibold mb-10">ArveonTech</h1>
       <div className="flex gap-10">
         {iconList.map(({ path, icon, name }, i) => (

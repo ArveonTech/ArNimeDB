@@ -29,8 +29,6 @@ const useUpdateToday = () => {
           today,
           data: response.data.data,
         };
-        console.log("Cache Key:", cacheKeyUpdateAnime);
-        console.log("Data yang disimpan:", newData);
         localStorage.setItem(cacheKeyUpdateAnime, JSON.stringify(newData));
         setUpdateAnime(response.data.data);
       } catch (error) {
