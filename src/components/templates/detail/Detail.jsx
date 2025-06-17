@@ -135,7 +135,7 @@ const Detail = ({ data }) => {
             </div>
           </div>
         ) : (
-          <p className="text-red-500 text-center text-2xl font-semibold ">Trailer tidak tersedia</p>
+          <p className="text-red-500 text-center text-2xl font-semibold ">Trailer not available.</p>
         )}
       </main>
       <Footer />

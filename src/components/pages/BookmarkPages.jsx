@@ -29,8 +29,8 @@ const FavoritePages = () => {
   return (
     <div className="mt-10">
       <h1 className="text-3xl text-center text-white">Bookmark</h1>
-      <div className="px-4 mt-10 flex gap-10 justify-center flex-wrap mb-40">
-        {data && data.length > 0 ? data.map((item, i) => <Card data={item} key={i} handleClick={handleClick} />) : <div className="text-white text-xl">Not Found</div>}
+      <div className="px-4 mt-20 flex gap-10 justify-center flex-wrap mb-40">
+        {data && data.length > 0 ? data.map((item, i) => <Card data={item} key={i} handleClick={handleClick} />) : <div className="text-red-500 text-2xl">Not Found</div>}
       </div>
       <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" transition={Bounce} />
     </div>

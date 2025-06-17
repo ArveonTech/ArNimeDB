@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ data, i, handleClick }) => {
   return (
-    <div className="w-full h-24 rounded-2xl overflow-hidden flex md:w-full lg:w-[600px] mt-10" key={i}>
+    <div className="w-full h-24 rounded-2xl overflow-hidden flex md:w-full lg:w-[600px]" key={i}>
       <Link to={`/detail/${data.mal_id}`}>
         <img src={data.images.jpg.image_url} alt={`image-${i}`} className="w-30 h-full lg:w-60 object-cover object-center" />
       </Link>

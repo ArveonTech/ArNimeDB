@@ -44,7 +44,7 @@ const GenresPages = () => {
         <Loading />
       ) : (
         <>
-          <div className="flex mt-20 gap-10 flex-wrap justify-center">{listAnime && listAnime.length > 0 ? listAnime.map((data, i) => <ListAnime data={data} key={i} />) : <p className="text-white text-xl">Not Found</p>}</div>
+          <div className="flex mt-20 gap-10 flex-wrap justify-center">{listAnime && listAnime.length > 0 ? listAnime.map((data, i) => <ListAnime data={data} key={i} />) : <p className="text-red-500 text-xl">Not Found</p>}</div>
           <Pagination handleNext={nextPage} handlePrev={prevPage} currentPage={pageFromQuery} lastPage={pages?.last_visible_page} />
         </>
       )}
