@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import Loading from "../templates/loading/Loading";
 import ListAnime from "../templates/listAnime/ListAnime";
 import Dropdown from "../templates/dropdowngenres/Dropdown";
-import Pagination from "../templates/pagination/pagination";
+import Pagination from "../templates/pagination/Pagination";
 
 const GenresPages = () => {
   const [searchParams, setSearchParams] = useSearchParams();
