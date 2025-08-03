@@ -2,8 +2,6 @@
 
 ArNimeDB adalah aplikasi web database anime sederhana yang memungkinkan pengguna untuk mencari anime, melihat detailnya, menyaring berdasarkan genre, dan menyimpan anime favorit ke dalam bookmark.
 
-Versi bahasa Inggris ada di bawah ya! 👇
-
 ---
 
 ## ☁️ Bahasa Indonesia
